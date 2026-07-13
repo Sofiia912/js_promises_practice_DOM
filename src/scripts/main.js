@@ -2,7 +2,9 @@
 
 const firstPromise = new Promise((resolve, reject) => {
   document.addEventListener('click', (e) => {
-    resolve('First promise was resolved');
+    if (e.button === 0) {
+      resolve('First promise was resolved');
+    }
   });
 
   setTimeout(() => {
@@ -12,7 +14,9 @@ const firstPromise = new Promise((resolve, reject) => {
 
 const secondPromise = new Promise((resolve) => {
   document.addEventListener('click', (e) => {
-    resolve('Second promise was resolved');
+    if (e.button === 0) {
+      resolve('Second promise was resolved');
+    }
   });
 
   document.addEventListener('contextmenu', (e) => {
@@ -37,10 +41,7 @@ const thirdPromise = new Promise((resolve) => {
 
   document.addEventListener('contextmenu', (e) => {
     e.preventDefault();
-
-    if (e.button === 2) {
-      rightClicked = true;
-    }
+    rightClicked = true;
 
     if (leftClicked && rightClicked) {
       resolve('Third promise was resolved');
@@ -60,12 +61,12 @@ function notification(message, type) {
 
 firstPromise
   .then((message) => notification(message, 'success'))
-  .catch((error) => notification(error, 'error'));
+  .catch((error) => notification(error.message, 'error'));
 
 secondPromise
   .then((message) => notification(message, 'success'))
-  .catch((error) => notification(error, 'error'));
+  .catch((error) => notification(error.message, 'error'));
 
 thirdPromise
   .then((message) => notification(message, 'success'))
-  .catch((error) => notification(error, 'error'));
+  .catch((error) => notification(error.message, 'error'));
