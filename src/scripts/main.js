@@ -63,9 +63,7 @@ firstPromise
   .then((message) => notification(message, 'success'))
   .catch((error) => notification(error.message, 'error'));
 
-secondPromise
-  .then((message) => notification(message, 'success'))
-  .catch((error) => notification(error.message, 'error'));
+secondPromise.then((message) => notification(message, 'success'));
 
 thirdPromise
   .then((message) => notification(message, 'success'))
